@@ -1,0 +1,14 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://unyimeudoh:211999@cluster0.ennsv.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+      database: Tinyurl
+
+logging:
+  level:
+    org:
+      springframework:
+        data:
+          mongodb:
+            core:
+              MongoTemplate: DEBUG

@@ -1,8 +1,11 @@
 package com.piraxx.tinyurl.services.ServicesImpl;
 
+import org.springframework.stereotype.Component;
+
 import java.util.List;
 import java.util.function.ToIntFunction;
 
+@Component
 public class BloomFilter {
     private final long[] bitArray;
     private final List<ToIntFunction<String>>  hashHouse = new HashHouse().build();

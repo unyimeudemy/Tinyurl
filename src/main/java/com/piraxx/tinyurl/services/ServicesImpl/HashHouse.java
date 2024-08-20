@@ -1,10 +1,14 @@
 package com.piraxx.tinyurl.services.ServicesImpl;
 
+import org.springframework.stereotype.Component;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.ToIntFunction;
 
+
+@Component
 public class HashHouse {
 
     private static int BIT_ARRAY_SIZE ;
