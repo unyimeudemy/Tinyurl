@@ -1,6 +1,7 @@
 package com.piraxx.tinyurl.services.ServicesImpl;
 
 import com.piraxx.tinyurl.exceptions.InternalServerErrorException;
+import com.piraxx.tinyurl.exceptions.NotFoundException;
 import com.piraxx.tinyurl.models.LegitUrls;
 import com.piraxx.tinyurl.models.SpamUrls;
 import com.piraxx.tinyurl.repository.LegitUrlsRepository;
@@ -95,7 +96,7 @@ public class UrlServiceImpl implements UrlService {
             if(legitUrls.isPresent()) {
                 return legitUrls.get().getValue();
             }else {
-                return "Url not found";
+                throw new NotFoundException("URL not found");
             }
         }catch (Exception e){
             throw new InternalServerErrorException(e.getMessage());

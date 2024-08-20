@@ -2,10 +2,8 @@ package com.piraxx.tinyurl.controllers;
 
 
 import com.piraxx.tinyurl.domain.requests.UrlRequestDto;
-import com.piraxx.tinyurl.models.LegitUrls;
 import com.piraxx.tinyurl.services.ServicesImpl.BloomFilter;
 import com.piraxx.tinyurl.services.UrlService;
-import com.piraxx.tinyurl.utils.SnowflakeIdGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +15,6 @@ import java.util.Optional;
 @RequestMapping("/api/v1/url")
 public class UrlController {
 
-    //TODO check if url already exist before generating tiny and inserting spam
 
     @Autowired
     private UrlService urlService;
