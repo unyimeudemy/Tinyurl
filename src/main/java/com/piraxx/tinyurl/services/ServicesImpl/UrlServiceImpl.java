@@ -98,6 +98,8 @@ public class UrlServiceImpl implements UrlService {
             }else {
                 throw new NotFoundException("URL not found");
             }
+        }catch (NotFoundException e){
+            throw e;
         }catch (Exception e){
             throw new InternalServerErrorException(e.getMessage());
         }

@@ -155,18 +155,33 @@ public class UrlServiceImplUnitTest {
         assertThat(url).isEqualTo(legitUrl.getValue());
     }
 
-//    @Test
-//    public void test_that_findByKey_throws_not_found_exception_for_none_existing_url(){
-//        LegitUrls legitUrl = LegitUrls.builder()
-//                .key("https://tiny.com/27qMi57J")
-//                .value("https://example.com/long-url")
-//                .build();
-//
-//        when(legitUrlsRepository.findById(legitUrl.getKey()))
-//                .thenReturn(Optional.empty());
-//
-//        assertThatThrownBy(() -> underTest.findByKey(legitUrl.getKey()))
-//                .isInstanceOf(NotFoundException.class)
-//                .hasMessage("URL not found");
-//    }
+    @Test
+    public void test_that_findByKey_throws_not_found_exception_for_none_existing_url(){
+        LegitUrls legitUrl = LegitUrls.builder()
+                .key("https://tiny.com/27qMi57J")
+                .value("https://example.com/long-url")
+                .build();
+
+        when(legitUrlsRepository.findById(legitUrl.getKey()))
+                .thenReturn(Optional.empty());
+
+        assertThatThrownBy(() -> underTest.findByKey(legitUrl.getKey()))
+                .isInstanceOf(NotFoundException.class)
+                .hasMessage("URL not found");
+    }
+
+    @Test
+    public void test_that_findByKey_throws_internal_server_error_for_unexpected_cases(){
+        LegitUrls legitUrl = LegitUrls.builder()
+                .key("https://tiny.com/27qMi57J")
+                .value("https://example.com/long-url")
+                .build();
+
+        when(legitUrlsRepository.findById(legitUrl.getKey()))
+                .thenThrow(new RuntimeException("Something expected happened"));
+
+        assertThatThrownBy(() -> underTest.findByKey(legitUrl.getKey()))
+                .isInstanceOf(InternalServerErrorException.class)
+                .hasMessage("Something expected happened");
+    }
 }

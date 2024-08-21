@@ -24,12 +24,12 @@ public class SnowflakeIdGenerator {
     private final long datacenterId;
 
     public SnowflakeIdGenerator(long workerId, long datacenterId) {
-        //Ensure that the machine generating the id is valid machine on the network
+        //Ensures that the machine generating the id is valid machine on the network
         if (workerId > maxWorkerId || workerId < 0) {
             throw new IllegalArgumentException(String.format("worker Id can't be greater than %d or less than 0", maxWorkerId));
         }
 
-        //Ensure that the data center hosting the machine is a valid one in the network
+        //Ensures that the data center hosting the machine is a valid one in the network
         if (datacenterId > maxDatacenterId || datacenterId < 0) {
             throw new IllegalArgumentException(String.format("datacenter Id can't be greater than %d or less than 0", maxDatacenterId));
         }
@@ -39,11 +39,11 @@ public class SnowflakeIdGenerator {
 
     public synchronized long nextId() {
 
-        // Gets the current time in the machine that the id is to generated
+        // Gets the current time in the machine that the id is to be generated
         long timestamp = timeGen();
 
         /*
-         * Monotonicity Guarantee: The algorithms guaranties that all ids are unique based on
+         * To guarantee monotonicity : The algorithms guaranties that all ids are unique based on
          * the time they were generated. This means that if something where to happen and
          * machine time shifted after the time it generated an id, then it will pose the
          * possibility of generating an already existing id. So here, we check that the
