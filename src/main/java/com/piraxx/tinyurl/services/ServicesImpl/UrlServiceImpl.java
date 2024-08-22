@@ -45,18 +45,19 @@ public class UrlServiceImpl implements UrlService {
     public String generateShort(String url) {
 
         try{
-            // check if url already exist
-            Optional<LegitUrls> existingUrl = legitUrlsRepository.findByValue(url);
-            if (existingUrl.isPresent()) {
-                return existingUrl.get().getKey();
-            }
 
-            // check if it is a spam
+            // check if it is a spam URL
             if(bloomFilter.mightContain(url)){
                 Optional<SpamUrls> spamUrl = spamUrlsRepository.findByUrl(url);
                 if(spamUrl.isPresent()){
                     return "Potential spam detected: URL flagged by the system.";
                 }
+            }
+
+            // check if url already exist
+            Optional<LegitUrls> existingUrl = legitUrlsRepository.findByValue(url);
+            if (existingUrl.isPresent()) {
+                return existingUrl.get().getKey();
             }
 
             long id = snowflakeIdGenerator.nextId();
@@ -105,3 +106,5 @@ public class UrlServiceImpl implements UrlService {
         }
     }
 }
+
+//"https://tiny.com/27sCAEuZSLF"

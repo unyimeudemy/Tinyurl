@@ -84,12 +84,9 @@ public class UrlServiceImplUnitTest {
                 .url("https://example.com/spam-url")
                 .build();
 
-        when(legitUrlsRepository.findByValue(spamUrl.getUrl()))
-                .thenReturn(Optional.empty());
         when(bloomFilter.mightContain(spamUrl.getUrl())).thenReturn(true);
         when(spamUrlsRepository.findByUrl(spamUrl.getUrl()))
                 .thenReturn(Optional.of(spamUrl));
-
 
         String shortUrl = underTest.generateShort(spamUrl.getUrl());
         assertThat(shortUrl).isEqualTo("Potential spam detected: URL flagged by the system.");

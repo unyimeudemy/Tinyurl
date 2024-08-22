@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 @ExtendWith(MockitoExtension.class)
-@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
+    @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class EncoderUnitTest {
 
     @Test
