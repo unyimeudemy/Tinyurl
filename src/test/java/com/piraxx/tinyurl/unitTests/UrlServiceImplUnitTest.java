@@ -44,7 +44,8 @@ public class UrlServiceImplUnitTest {
     @InjectMocks
     private UrlServiceImpl underTest;
 
-    private String baseURL = "http://localhost:5173";
+//    private String baseURL = "http://localhost:5173";
+    private String baseURL = "https://t-2t2q.onrender.com";
 
     @Test
     public void test_that_generateShort_generates_and_return_shortUrl(){
