@@ -46,12 +46,13 @@ public class UrlController {
         );
     }
 
-    @GetMapping()
+    @PostMapping("/get-url")
     public ResponseEntity<?> getOriginalUrl(@RequestBody UrlRequestDto urlRequestDto){
+        System.out.println("------------------------------" + urlRequestDto.getUrl());
         String legitUrl = urlService.findByKey(urlRequestDto.getUrl());
         return new ResponseEntity<>(
                 UrlRequestDto.builder().url(legitUrl).build(),
-                HttpStatus.FOUND
+                HttpStatus.OK
         );
     }
 }

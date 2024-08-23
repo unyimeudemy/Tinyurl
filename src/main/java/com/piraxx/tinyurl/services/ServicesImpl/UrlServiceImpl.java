@@ -50,7 +50,7 @@ public class UrlServiceImpl implements UrlService {
             if(bloomFilter.mightContain(url)){
                 Optional<SpamUrls> spamUrl = spamUrlsRepository.findByUrl(url);
                 if(spamUrl.isPresent()){
-                    return "Potential spam detected: URL flagged by the system.";
+                    return "URL flagged by the system as spam.";
                 }
             }
 
@@ -106,5 +106,3 @@ public class UrlServiceImpl implements UrlService {
         }
     }
 }
-
-//"https://tiny.com/27sCAEuZSLF"

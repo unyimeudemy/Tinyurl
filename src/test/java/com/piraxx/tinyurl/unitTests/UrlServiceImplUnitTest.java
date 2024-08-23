@@ -44,10 +44,12 @@ public class UrlServiceImplUnitTest {
     @InjectMocks
     private UrlServiceImpl underTest;
 
+    private String baseURL = "http://localhost:5173";
+
     @Test
     public void test_that_generateShort_generates_and_return_shortUrl(){
         LegitUrls legitUrl = LegitUrls.builder()
-                .key("https://tiny.com/27qMi57J")
+                .key(baseURL + "/27qMi57J")
                 .value("https://example.com/long-url")
                 .build();
         long id = 12345678L;
@@ -67,7 +69,7 @@ public class UrlServiceImplUnitTest {
     @Test
     public void test_that_generateShort_returns_url_if_exist(){
         LegitUrls legitUrl = LegitUrls.builder()
-                .key("https://tiny.com/27qMi57J")
+                .key(baseURL + "/27qMi57J")
                 .value("https://example.com/long-url")
                 .build();
 
@@ -89,7 +91,7 @@ public class UrlServiceImplUnitTest {
                 .thenReturn(Optional.of(spamUrl));
 
         String shortUrl = underTest.generateShort(spamUrl.getUrl());
-        assertThat(shortUrl).isEqualTo("Potential spam detected: URL flagged by the system.");
+        assertThat(shortUrl).isEqualTo("URL flagged by the system as spam.");
     }
 
     @Test
@@ -142,7 +144,7 @@ public class UrlServiceImplUnitTest {
     @Test
     public void test_that_findByKey_finds_return_url(){
         LegitUrls legitUrl = LegitUrls.builder()
-                .key("https://tiny.com/27qMi57J")
+                .key(baseURL + "/27qMi57J")
                 .value("https://example.com/long-url")
                 .build();
 
@@ -155,7 +157,7 @@ public class UrlServiceImplUnitTest {
     @Test
     public void test_that_findByKey_throws_not_found_exception_for_none_existing_url(){
         LegitUrls legitUrl = LegitUrls.builder()
-                .key("https://tiny.com/27qMi57J")
+                .key(baseURL + "/27qMi57J")
                 .value("https://example.com/long-url")
                 .build();
 
@@ -170,7 +172,7 @@ public class UrlServiceImplUnitTest {
     @Test
     public void test_that_findByKey_throws_internal_server_error_for_unexpected_cases(){
         LegitUrls legitUrl = LegitUrls.builder()
-                .key("https://tiny.com/27qMi57J")
+                .key(baseURL + "/27qMi57J")
                 .value("https://example.com/long-url")
                 .build();
 
